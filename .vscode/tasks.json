@@ -1,0 +1,62 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Backend (FastAPI)",
+      "type": "shell",
+      "command": "python -m uvicorn main:app --app-dir backend --port 8001 --host 127.0.0.1 --reload",
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Started server process",
+          "endsPattern": "Uvicorn running on"
+        }
+      },
+      "presentation": {
+        "group": "careerpilot",
+        "panel": "new",
+        "focus": false
+      }
+    },
+    {
+      "label": "Start Frontend (Vite)",
+      "type": "shell",
+      "command": "npm.cmd run dev",
+      "options": {
+        "cwd": "${workspaceFolder}/frontend"
+      },
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": {
+          "regexp": "^$"
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "VITE",
+          "endsPattern": "Local:"
+        }
+      },
+      "presentation": {
+        "group": "careerpilot",
+        "panel": "new",
+        "focus": false
+      }
+    },
+    {
+      "label": "Run CareerPilot (Backend & Frontend)",
+      "dependsOn": [
+        "Start Backend (FastAPI)",
+        "Start Frontend (Vite)"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    }
+  ]
+}
